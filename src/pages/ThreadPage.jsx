@@ -16,7 +16,7 @@ export default function ThreadPage() {
       try {
         const res = await messagesAPI.thread(userId);
         if (mounted && res.ok) setThread(res.messages || []);
-      } catch (e) {
+      } catch {
         setErr("Failed to load thread.");
       } finally {
         setLoading(false);

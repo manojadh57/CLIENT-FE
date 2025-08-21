@@ -46,7 +46,7 @@ export default function OnboardingPage() {
     if (!ok) return;
     try {
       await api.delete("/users/me?purge=1");
-    } catch (e) {
+    } catch {
       // fail-safe: logout regardless
     } finally {
       dispatch(logout());

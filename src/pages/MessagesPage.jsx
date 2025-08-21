@@ -22,7 +22,7 @@ export default function MessagesPage() {
         if (!mounted) return;
         setInbox(inboxRes.messages || []);
         setOutbox(outboxRes.messages || []);
-      } catch (e) {
+      } catch {
         setErr("Failed to load messages.");
       } finally {
         setLoading(false);
