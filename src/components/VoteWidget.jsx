@@ -32,7 +32,7 @@ export default function VoteWidget({ id }) {
     try {
       setLoading(true);
       await votesAPI.votePost(id, newVote);
-    } catch (err) {
+    } catch {
       setVote(vote); // revert
       setScore((s) => s - delta);
     } finally {

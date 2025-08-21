@@ -31,7 +31,7 @@ export default function CommentComposer({
       incQuota("comments");
       setBody("");
       if (onSuccess) onSuccess();
-    } catch (err) {
+    } catch {
       setErr("Failed to post comment.");
     } finally {
       setLoading(false);

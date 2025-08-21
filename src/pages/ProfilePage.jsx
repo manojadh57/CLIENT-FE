@@ -21,7 +21,7 @@ export default function ProfilePage() {
     try {
       await api.delete("/users/me?purge=1");
       dispatch(logout());
-    } catch (e) {
+    } catch {
       alert("Delete failed.");
     }
   };

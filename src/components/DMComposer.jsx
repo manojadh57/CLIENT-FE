@@ -21,7 +21,7 @@ export default function DMComposer({ toUserId, onSuccess }) {
         const { url } = await stripeAPI.createDMUnlockSession();
         window.location.href = url;
         return;
-      } catch (e) {
+      } catch {
         return setErr("Payment session failed. Try again.");
       }
     }
@@ -35,7 +35,7 @@ export default function DMComposer({ toUserId, onSuccess }) {
       if (!quota.unlimited) incQuota("dms");
       setBody("");
       if (onSuccess) onSuccess();
-    } catch (e) {
+    } catch {
       setErr("Failed to send message.");
     } finally {
       setLoading(false);
