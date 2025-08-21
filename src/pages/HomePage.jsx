@@ -1,31 +1,46 @@
-// /src/pages/HomePage.jsx
-
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../store";
 import { fetchPosts } from "../store/postsSlice";
 import PostComposer from "../components/PostComposer";
 import PostCard from "../components/PostCard";
-import QuotaBar from "../components/QuotaBar";
 
 export default function HomePage() {
-  const dispatch = useDispatch();
-  const { all: posts, loading, error } = useSelector((s) => s.posts);
+  const dispatch = useAppDispatch();
+  const { all: posts, loading, error } = useAppSelector((s) => s.posts);
 
   useEffect(() => {
-    dispatch(fetchPosts({ page: 1, limit: 10 }));
+    dispatch(fetchPosts({ page: 1, limit: 20 }));
   }, [dispatch]);
 
   return (
-    <div className="max-w-2xl mx-auto mt-6 px-4">
-      <QuotaBar />
+    <main className="max-w-3xl mx-auto px-4 py-8">
+      {/* Hero Banner */}
+      <section className="mb-10 text-center border border-black rounded-md py-12 px-6 bg-[#fefefe] shadow-lg animate-fade-in">
+        <h1 className="text-4xl md:text-5xl font-black tracking-tight uppercase mb-4 text-black leading-tight">
+          Study. <span className="text-blue-600">Connect.</span>{" "}
+          <span className="text-red-600">Build.</span>
+        </h1>
+        <p className="text-md md:text-lg text-gray-700 tracking-widest font-mono">
+          A brutalist forum for students, dreamers & builders.
+        </p>
+      </section>
+
+      {/* Composer */}
       <PostComposer />
 
-      {loading && <p className="text-center">Loading posts...</p>}
-      {error && <p className="text-red-500 text-center">Error: {error}</p>}
+      {/* Posts */}
+      {loading && <p className="text-gray-500 mt-4">Loading posts…</p>}
+      {error && <p className="text-red-500 mt-4">{error}</p>}
 
-      {posts.map((post) => (
-        <PostCard key={post.id} post={post} />
-      ))}
-    </div>
+      <section className="mt-8 space-y-6">
+        {posts.length === 0 ? (
+          <p className="text-gray-800 font-semibold">
+            No posts yet. Be the first to share something!
+          </p>
+        ) : (
+          posts.map((post) => <PostCard key={post.id} post={post} />)
+        )}
+      </section>
+    </main>
   );
 }

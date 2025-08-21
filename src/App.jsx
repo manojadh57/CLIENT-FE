@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
+import MainLayout from "./components/MainLayout";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
@@ -8,6 +9,7 @@ import MessagesPage from "./pages/MessagesPage";
 import ThreadPage from "./pages/ThreadPage";
 import BookmarksPage from "./pages/BookmarksPage";
 import OnboardingPage from "./pages/OnboardingPage";
+import RulesPage from "./pages/RulesPage";
 
 export default function App() {
   return (
@@ -15,14 +17,65 @@ export default function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/onboarding" element={<OnboardingPage />} />
 
-      {/* Protected Routes */}
+      {/* Protected Routes with MainLayout */}
       <Route element={<ProtectedRoute />}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/posts/:id" element={<PostDetailPage />} />
-        <Route path="/messages" element={<MessagesPage />} />
-        <Route path="/messages/:userId" element={<ThreadPage />} />
-        <Route path="/bookmarks" element={<BookmarksPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route
+          path="/"
+          element={
+            <MainLayout>
+              <HomePage />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/posts/:id"
+          element={
+            <MainLayout>
+              <PostDetailPage />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/messages"
+          element={
+            <MainLayout>
+              <MessagesPage />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/messages/:userId"
+          element={
+            <MainLayout>
+              <ThreadPage />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/bookmarks"
+          element={
+            <MainLayout>
+              <BookmarksPage />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <MainLayout>
+              <ProfilePage />
+            </MainLayout>
+          }
+        />
+
+        <Route
+          path="/rules"
+          element={
+            <MainLayout>
+              <RulesPage />
+            </MainLayout>
+          }
+        />
       </Route>
 
       <Route
